@@ -1,9 +1,8 @@
-import React, {useState, useEffect} from 'react'
-import axios from "axios"
+import React, {useState} from 'react'
 import Search from './Search'
-import Result from "./NotFound"
 
-function Main() {
+
+function Main({theme}) {
     const [input, setInput] = useState("");
     
     const handleInput = (e) =>{
@@ -13,7 +12,7 @@ function Main() {
     return (
         <div>
             <h3>devfinder</h3>
-            <Search handleInput={handleInput} input={input}/>
+            <Search handleInput={handleInput} input={input} theme={theme}/>
         </div>
     )
 }

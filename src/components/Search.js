@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios';
 import NotFound from "./NotFound"
+import "./styles/css/styles.css"
 
-function Search({handleInput, input}) {
+function Search({handleInput, input, theme}) {
     const [name, setName]=  useState("");
     const [username, setUsername] = useState("");
     const [avatar, setAvatar] =useState("");
@@ -35,6 +36,8 @@ function Search({handleInput, input}) {
         fetchdata(); 
     }, []);
 
+    console.log(typeof(theme)  + " inside Search")
+
     const fetchdata = async () =>{
         const result = await axios.get("https://api.github.com/users/example");
         setData(result.data);
@@ -66,27 +69,42 @@ function Search({handleInput, input}) {
         </form>
 
         {error  ? <NotFound /> : ( 
-            <div>
-            <div>
+            <div className="container" style = {theme === "dark" ? { backgroundColor : "#1f2a48"} : { backgroundColor : "#fefefe"}}>
+            <div className ="left-div">
                 <img src ={avatar} alt="avatar"/>
-                <h6>{name ? name : "Github User"}</h6>
+            </div>
+
+            <div className ="right-div">
+            <div className = "top-div">
+                
+                <h2>{name ? name : "Github User"}</h2>
                 <p>@{username ? username : "No username"}</p>
                 <p>{bio  ? bio : "This profile has no bio"}</p>
             </div>
-            
-            <div>
-                <p>{repos ? repos : 0}</p>
-                <p>{followers ? followers : 0}</p>
-                <p>{following ? following : 0}</p>
+
+
+            <div className = "middle-container" style = {theme === "dark" ? { backgroundColor : "#141c2f"} : { backgroundColor : "#f5f8ff"}}>
+            <div className="middle-div" >
+                <p className ="middle-p">Repos</p>
+                <p className ="middle-p">Followers</p>
+                <p className ="middle-p">Following</p>
+            </div>
+            <div className ="middle-div">
+                <p className ="middle-p">{repos ? repos : 0}</p>
+                <p className ="middle-p">{followers ? followers : 0}</p>
+                <p className ="middle-p">{following ? following : 0}</p>
+            </div>
             </div>
 
-            <div>
-                <p>{location ? location : "Not available"}</p>
-                <p>{blog ? blog : "Not available"}</p>
-                <p>{twitter ? twitter : "Not available"}</p>
-                <p>{company ? company : "Not available"}</p>
-                
 
+            <div className = "bottom-div">
+                <p className = "layer1">{location ? location : "Not available"}</p>
+                <p className = "layer2">{blog ? blog : "Not available"}</p>
+            </div>
+            <div className = "bottom-div">
+                <p className = "layer3">{twitter ? twitter : "Not available"}</p>
+                <p className = "layer4">{company ? company : "Not available"}</p>
+            </div>
             </div>
             </div>
       
