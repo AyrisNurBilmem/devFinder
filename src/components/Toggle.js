@@ -1,10 +1,11 @@
 import React from 'react'
+import "./styles/css/styles.css"
 
 const Toggle = ({theme, toggleTheme}) => {
     console.log(theme);
     return (
-        <div>
-            <button onClick = {toggleTheme}>{theme === "dark" ? "Light Mode" : "Dark Mode"}</button>
+        <div className ="theme-div">
+            <button className="theme-button" onClick = {toggleTheme}>{theme === "dark" ? "Light Mode" : "Dark Mode"}</button>
         </div>
     )
 }

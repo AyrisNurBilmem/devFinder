@@ -2,6 +2,11 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios';
 import NotFound from "./NotFound"
 import "./styles/css/styles.css"
+import * as MdIcons from "react-icons/md"
+import * as HiIcons from "react-icons/hi"
+import * as IoIcons from "react-icons/io"
+import * as RiIcons from "react-icons/ri"
+import * as FiIcons from "react-icons/fi"
 
 function Search({handleInput, input, theme}) {
     const [name, setName]=  useState("");
@@ -62,9 +67,9 @@ function Search({handleInput, input, theme}) {
     return (
         <div>
          <form onSubmit ={(e) => e.preventDefault()}>
-            <div>
-            <input type="text" placeholder="Search Github username..." onChange={handleInput} value ={input}/> 
-            <span><button type="submit" onClick = {handleSearch}>Search</button></span>
+            <div className ="search-div" style = {theme === "dark" ? { backgroundColor : "#1f2a48"} : { backgroundColor : "#fefefe"}}>
+            <span><FiIcons.FiSearch className= "search-icon" /></span><input className ="search-input" type="text" placeholder="Search Github username..." onChange={handleInput} value ={input} style = {theme === "dark" ? { backgroundColor : "#1f2a48"} : { backgroundColor : "#fefefe"}}/> 
+            <span><button type="submit" onClick = {handleSearch} className="search-button">Search</button></span>
             </div>
         </form>
 
@@ -98,12 +103,12 @@ function Search({handleInput, input, theme}) {
 
 
             <div className = "bottom-div">
-                <p className = "layer1">{location ? location : "Not available"}</p>
-                <p className = "layer2">{blog ? blog : "Not available"}</p>
+                <p className = "layer1"><MdIcons.MdLocationPin className ="icon"/>{location ? location : "Not available"}</p>
+                <p className = "layer3"><IoIcons.IoLogoTwitter className ="icon"/>{twitter ? twitter : "Not available"}</p>
             </div>
             <div className = "bottom-div">
-                <p className = "layer3">{twitter ? twitter : "Not available"}</p>
-                <p className = "layer4">{company ? company : "Not available"}</p>
+                <p className = "layer2"><HiIcons.HiLink className ="icon"/>{blog ? blog : "Not available"}</p>
+                <p className = "layer4"><RiIcons.RiBuildingFill className ="icon"/>{company ? company : "Not available"}</p>
             </div>
             </div>
             </div>

@@ -1,13 +1,14 @@
-.container{
+.container, .search-div, .devfinder{
     display:inline-flex;
     flex-wrap: wrap;
     justify-content: center;
     width: 800px;
     padding:30px 10px;
+   
     
 }
 
-.container, .middle-container{
+.container, .middle-container, .search-div{
     border-radius: 14px;
 }
 
@@ -16,6 +17,56 @@ img{
     border-radius: 50%;
     width:100px;
 }
+
+.devfinder{
+    padding:0px 1px;
+    justify-content: left;
+}
+
+.theme-div{
+  
+}
+
+.search-div{
+   padding:11px 10px;
+   margin-bottom:20px;
+}
+
+.search-icon  {
+    padding-right:10px;
+}
+
+
+.search-button{
+    border:none;
+    outline:none;
+    border-radius: 5px;
+
+    width:70px;
+    height:40px;
+
+    background-color: #0078fd;
+    color:aliceblue;
+    cursor: pointer;
+    font-family: 'Roboto Mono', monospace;
+}
+
+.search-input{
+    border:none;
+    outline:none;
+    width:700px;
+    height:40px;
+
+  
+    color:whitesmoke;
+
+}
+
+.search-input::placeholder{
+    color:whitesmoke;
+    font-family: 'Roboto Mono', monospace;
+}
+
 
 .left-div{
     padding:35px 30px 0px 40px;
@@ -37,15 +88,26 @@ img{
 }
 
 .middle-p{
+    text-align: left;
     padding:0 10px;
+    min-width: 100px;
 }
 
 .bottom-div{
     display:flex;
-    justify-content: center;
+    justify-content: left;
+   
+
 }
 
 .layer1, .layer2, .layer3, .layer4{
-    padding: 0 10px;
+    padding: 0 20px;
+    min-width: 200px;
+    text-align: left;
+   
+}
+
+.icon{
+    padding-right:15px;
 }
 

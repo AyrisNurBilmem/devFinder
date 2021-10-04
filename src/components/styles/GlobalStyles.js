@@ -9,6 +9,7 @@ export const GlobalStyles = createGlobalStyle `
         font-family: 'Roboto Mono', monospace;
         
     }
+
 `;
 
 export const lightTheme = {

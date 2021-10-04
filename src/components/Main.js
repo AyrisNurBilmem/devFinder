@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import Search from './Search'
+import "./styles/css/styles.css"
 
 
 function Main({theme}) {
@@ -11,7 +12,8 @@ function Main({theme}) {
 
     return (
         <div>
-            <h3>devfinder</h3>
+            <div className ="devfinder"><h3 >devfinder</h3></div>
+            
             <Search handleInput={handleInput} input={input} theme={theme}/>
         </div>
     )
