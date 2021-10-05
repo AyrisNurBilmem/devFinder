@@ -1,13 +1,30 @@
-import React from 'react'
-import "./styles/css/styles.css"
+import React from "react";
+import "./styles/css/styles.css";
+import * as MdIcons from "react-icons/md";
+import * as IoIcons from "react-icons/io";
 
-const Toggle = ({theme, toggleTheme}) => {
-    console.log(theme);
-    return (
-        <div className ="theme-div">
-            <button className="theme-button" onClick = {toggleTheme}>{theme === "dark" ? "Light Mode" : "Dark Mode"}</button>
-        </div>
-    )
-}
+const Toggle = ({ theme, toggleTheme }) => {
+  let sun = (
+    <div>
+      <p>
+        LIGHT <MdIcons.MdWbSunny />
+      </p>
+    </div>
+  );
 
-export default Toggle
+  let moon = (
+    <div>
+      <p>
+        DARK <IoIcons.IoMdMoon />
+      </p>
+    </div>
+  );
+
+  return (
+    <div className="theme-div" onClick={toggleTheme}>
+      {theme === "dark" ? sun : moon}
+    </div>
+  );
+};
+
+export default Toggle;

@@ -11,10 +11,9 @@ function Main({theme}) {
     }
 
     return (
-        <div>
-            <div className ="devfinder"><h3 >devfinder</h3></div>
-            
-            <Search handleInput={handleInput} input={input} theme={theme}/>
+        <div className ="devfinder">
+            <div ><h3 >devfinder</h3></div> 
+            <Search handleInput={handleInput} input={input} theme={theme} setInput = {setInput} />
         </div>
     )
 }
