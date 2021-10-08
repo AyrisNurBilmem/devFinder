@@ -5,19 +5,15 @@ import * as IoIcons from "react-icons/io";
 
 const Toggle = ({ theme, toggleTheme }) => {
   let sun = (
-    <div>
-      <p>
-        LIGHT <MdIcons.MdWbSunny />
-      </p>
-    </div>
+    <p>
+      LIGHT <MdIcons.MdWbSunny />
+    </p>
   );
 
   let moon = (
-    <div>
-      <p>
-        DARK <IoIcons.IoMdMoon />
-      </p>
-    </div>
+    <p>
+      DARK <IoIcons.IoMdMoon />
+    </p>
   );
 
   return (

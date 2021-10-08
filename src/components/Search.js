@@ -3,44 +3,58 @@ import axios from "axios";
 import NotFound from "./NotFound";
 import "./styles/css/styles.css";
 import "./styles/css/searchArea.css";
+import "./styles/css/responsive.css";
+import moment from "moment";
 import * as MdIcons from "react-icons/md";
 import * as HiIcons from "react-icons/hi";
 import * as IoIcons from "react-icons/io";
 import * as RiIcons from "react-icons/ri";
 import * as FiIcons from "react-icons/fi";
 
-function Search({ handleInput, input, theme, setInput }) {
-  const [name, setName] = useState("");
-  const [username, setUsername] = useState("");
-  const [avatar, setAvatar] = useState("");
-  const [bio, setBio] = useState("");
-  const [repos, setRepos] = useState("");
-  const [followers, setFollowers] = useState("");
-  const [following, setFollowing] = useState("");
-  const [location, setLocation] = useState("");
-  const [blog, setBlog] = useState("");
-  const [twitter, setTwitter] = useState("");
-  const [company, setCompany] = useState("");
+function Search({ theme }) {
   const [error, setError] = useState(false);
+  const [input, setInput] = useState("");
+
+  const [user, setUser] = useState({
+    name: String,
+    username: String,
+    bio: String,
+    createDate: String,
+    repos: String,
+    followers: String,
+    following: String,
+    location: String,
+    blog: String,
+    twitter: String,
+    company: String,
+    error: String,
+    avatar: String,
+  });
 
   const setData = (data) => {
-    setName(data.name);
-    setUsername(data.login);
-    setBio(data.bio);
-    setAvatar(data.avatar_url);
-    setRepos(data.public_repos);
-    setFollowers(data.followers);
-    setFollowing(data.following);
-    setLocation(data.location);
-    setBlog(data.blog);
-    setTwitter(data.twitter_username);
-    setCompany(data.company);
+    setUser({
+      name: data.name,
+      username: data.login,
+      bio: data.bio,
+      avatar: data.avatar_url,
+      createDate: data.created_at,
+      repos: data.public_repos,
+      followers: data.followers,
+      following: data.following,
+      location: data.location,
+      blog: data.blog,
+      twitter: data.twitter_username,
+      company: data.company,
+    });
   };
 
   useEffect(() => {
     fetchdata();
   }, []);
 
+  const handleInput = (e) => {
+    setInput(e.target.value);
+  };
   const fetchdata = async () => {
     const result = await axios.get("https://api.github.com/users/example");
     setData(result.data);
@@ -49,13 +63,9 @@ function Search({ handleInput, input, theme, setInput }) {
   const handleSearch = async () => {
     try {
       const result = await axios.get(`https://api.github.com/users/${input}`);
-      if (result.data.message) {
-        setError(true);
-      } else {
-        setData(result.data);
-        setError(false);
-        setInput("");
-      }
+      setData(result.data);
+      setError(false);
+      setInput("");
     } catch (error) {
       console.log("User not found");
       setError(true);
@@ -64,6 +74,9 @@ function Search({ handleInput, input, theme, setInput }) {
 
   return (
     <div>
+      <div className="devfinder">
+        <h3>devfinder</h3>
+      </div>
       <form onSubmit={(e) => e.preventDefault()}>
         <div
           className="search-div"
@@ -79,9 +92,13 @@ function Search({ handleInput, input, theme, setInput }) {
         >
           <span>
             <FiIcons.FiSearch
+              size={24}
               className="search-icon"
-              style={{ color: "#0a50a7" }}
-            r/>
+              style={
+                theme === "dark" ? { color: "#0a50a7" } : { color: "#5C7AEA" }
+              }
+              r
+            />
           </span>
           <input
             className="search-input"
@@ -95,15 +112,14 @@ function Search({ handleInput, input, theme, setInput }) {
                 : { backgroundColor: "#fefefe" }
             }
           />
-          <span>
-            <button
-              type="submit"
-              onClick={handleSearch}
-              className="search-button"
-            >
-              Search
-            </button>
-          </span>
+
+          <button
+            type="submit"
+            onClick={handleSearch}
+            className="search-button"
+          >
+            Search
+          </button>
         </div>
       </form>
 
@@ -122,16 +138,23 @@ function Search({ handleInput, input, theme, setInput }) {
           }
         >
           <div className="left-div">
-            <img src={avatar} alt="avatar" />
+            <img src={user.avatar} alt="avatar" />
           </div>
 
           <div className="right-div">
             <div className="top-div">
-              <h2>{name ? name : "Github User"}</h2>
-              <p style={{ color: "#0a50a7" }}>
-                @{username ? username : "No username"}
+              <p className="date">
+                {user.createDate
+                  ? moment(user.createDate).format("[Joined] Do MMM YYYY")
+                  : "Date not available"}
               </p>
-              <p>{bio ? bio : "This profile has no bio"}</p>
+              <h2 style={{ marginBottom: "0px" }}>
+                {user.name ? user.name : "Github User"}
+              </h2>
+              <p style={{ color: "#0a50a7", marginTop: "2px" }}>
+                @{user.username ? user.username : "No username"}
+              </p>
+              <p>{user.bio ? user.bio : "This profile has no bio"}</p>
             </div>
 
             <div
@@ -148,31 +171,38 @@ function Search({ handleInput, input, theme, setInput }) {
                 <p className="middle-p">Following</p>
               </div>
               <div className="middle-div">
-                <p className="middle-p">{repos ? repos : 0}</p>
-                <p className="middle-p">{followers ? followers : 0}</p>
-                <p className="middle-p">{following ? following : 0}</p>
+                <p className="middle-p number">{user.repos ? user.repos : 0}</p>
+                <p className="middle-p number">
+                  {user.followers ? user.followers : 0}
+                </p>
+                <p className="middle-p number">
+                  {user.following ? user.following : 0}
+                </p>
               </div>
             </div>
 
             <div className="bottom-div">
-              <p className="layer1">
-                <MdIcons.MdLocationPin className="icon" />
-                {location ? location : "Not available"}
-              </p>
-              <p className="layer3">
-                <IoIcons.IoLogoTwitter className="icon" />
-                {twitter ? twitter : "Not available"}
-              </p>
-            </div>
-            <div className="bottom-div">
-              <p className="layer2">
-                <HiIcons.HiLink className="icon" />
-                {blog ? blog : "Not available"}
-              </p>
-              <p className="layer4">
-                <RiIcons.RiBuildingFill className="icon" />
-                {company ? company : "Not available"}
-              </p>
+              <div className="bottom-div-items">
+                <p className="layer1">
+                  <MdIcons.MdLocationPin className="icon" />
+                  {user.location ? user.location : "Not Available"}
+                </p>
+                <p className="layer1">
+                  <IoIcons.IoLogoTwitter className="icon" />
+                  {user.twitter ? user.twitter : "Not Available"}
+                </p>
+              </div>
+
+              <div className="bottom-div-items">
+                <p className="layer2">
+                  <HiIcons.HiLink className="icon" />
+                  {user.blog ? user.blog : "Not Available"}
+                </p>
+                <p className="layer2">
+                  <RiIcons.RiBuildingFill className="icon" />
+                  {user.company ? user.company : "Not Available"}
+                </p>
+              </div>
             </div>
           </div>
         </div>
