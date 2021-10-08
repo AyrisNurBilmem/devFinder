@@ -1,75 +1,84 @@
-.container, .search-div, .devfinder{
-    display:inline-flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 800px;
-    padding:30px 10px;   
+.container,
+.search-div,
+.devfinder {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 800px;
+  padding: 30px 10px;
 }
 
-.container, .middle-container, .search-div{
-    border-radius: 14px;
+.container,
+.middle-container,
+.search-div {
+  border-radius: 15px;
 }
 
-
-img{
-    border-radius: 50%;
-    width:100px;
+img {
+  border-radius: 50%;
+  width: 150px;
 }
 
-.devfinder{
-    width:700px;
-    height:20px;
-    padding:0px 1px;
-    justify-content: left;
+.devfinder {
+  padding: 10px 1px 10px 10px;
+  justify-content: left;
 }
 
-.theme-div{
+.theme-div {
+  cursor: pointer;
+  display: inline-flex;
+}
+
+.left-div {
+  padding: 35px 30px 0px 40px;
+}
+
+.right-div {
+  padding: 20px 30px 0px 40px;
+}
+
+.top-div {
+  text-align: left;
+  padding-bottom: 28px;
+}
+
+.middle-div {
+  display: flex;
+  padding: 0 30px;
+}
+
+.middle-p {
+  text-align: left;
+  padding: 5px 10px;
+  min-width: 100px;
+}
+
+.middle-p.number {
+  margin-top: 0px;
+}
+
+.bottom-div {
+  padding-top: 25px;
+}
+
+.bottom-div-items {
+  display: flex;
+  justify-content: left;
+}
+
+.date {
   float: right;
-  cursor:pointer;
+  margin-top: 8px;
 }
 
-
-.left-div{
-    padding:35px 30px 0px 40px;
+.layer1,
+.layer2 {
+  padding: 0 20px;
+  min-width: 200px;
+  text-align: left;
+  overflow: hidden;
 }
 
-.right-div{
-    padding:20px 30px 0px 40px;
+.icon {
+  padding-right: 15px;
 }
-
-
-.top-div{
-    text-align: left;
-}
-
-
-.middle-div{
-    display:flex;
-    padding:0 30px;
-}
-
-.middle-p{
-    text-align: left;
-    padding:0 10px;
-    min-width: 100px;
-}
-
-.bottom-div{
-    display:flex;
-    justify-content: left;
-   
-
-}
-
-.layer1, .layer2, .layer3, .layer4{
-    padding: 0 20px;
-    min-width: 200px;
-    text-align: left;
-    overflow:hidden;
-   
-}
-
-.icon{
-    padding-right:15px;
-}
-
