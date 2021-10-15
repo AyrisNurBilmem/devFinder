@@ -1,15 +1,36 @@
 /*  TABLET  */
 
-@media only screen and (max-width: 1025px) {
+@media only screen and (max-width: 1242px) {
   img {
     width: 200px;
+    height: 200px;
+  }
+  .container {
+    flex-direction: column;
+  }
+  .middle-container {
+    margin: auto;
   }
 }
 
 /*  MOBILE  */
 
 @media only screen and (max-width: 641px) {
+  .bottom-div-items {
+    display: block;
+  }
+
+  .container {
+    flex-direction: column;
+  }
+
+  .layer1,
+  .layer2 {
+    padding-bottom: 10px;
+  }
+
   img {
     width: 150px;
+    height: 150px;
   }
 }

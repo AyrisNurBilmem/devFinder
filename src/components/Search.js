@@ -15,21 +15,7 @@ function Search({ theme }) {
   const [error, setError] = useState(false);
   const [input, setInput] = useState("");
 
-  const [user, setUser] = useState({
-    name: String,
-    username: String,
-    bio: String,
-    createDate: String,
-    repos: String,
-    followers: String,
-    following: String,
-    location: String,
-    blog: String,
-    twitter: String,
-    company: String,
-    error: String,
-    avatar: String,
-  });
+  const [user, setUser] = useState();
 
   const setData = (data) => {
     setUser({
@@ -73,7 +59,7 @@ function Search({ theme }) {
   };
 
   return (
-    <div>
+    <div className="root">
       <div className="devfinder">
         <h3>devfinder</h3>
       </div>
@@ -90,28 +76,30 @@ function Search({ theme }) {
                 }
           }
         >
-          <span>
-            <FiIcons.FiSearch
-              size={24}
-              className="search-icon"
+          <div className="form-user-input-wrapper">
+            <span>
+              <FiIcons.FiSearch
+                size={24}
+                className="search-icon"
+                style={
+                  theme === "dark" ? { color: "#0a50a7" } : { color: "#5C7AEA" }
+                }
+                r
+              />
+            </span>
+            <input
+              className="search-input"
+              type="text"
+              placeholder="Search Github username..."
+              onChange={handleInput}
+              value={input}
               style={
-                theme === "dark" ? { color: "#0a50a7" } : { color: "#5C7AEA" }
+                theme === "dark"
+                  ? { backgroundColor: "#1f2a48" }
+                  : { backgroundColor: "#fefefe" }
               }
-              r
             />
-          </span>
-          <input
-            className="search-input"
-            type="text"
-            placeholder="Search Github username..."
-            onChange={handleInput}
-            value={input}
-            style={
-              theme === "dark"
-                ? { backgroundColor: "#1f2a48" }
-                : { backgroundColor: "#fefefe" }
-            }
-          />
+          </div>
 
           <button
             type="submit"
@@ -137,74 +125,80 @@ function Search({ theme }) {
                 }
           }
         >
-          <div className="left-div">
-            <img src={user.avatar} alt="avatar" />
-          </div>
-
-          <div className="right-div">
-            <div className="top-div">
-              <p className="date">
-                {user.createDate
-                  ? moment(user.createDate).format("[Joined] Do MMM YYYY")
-                  : "Date not available"}
-              </p>
-              <h2 style={{ marginBottom: "0px" }}>
-                {user.name ? user.name : "Github User"}
-              </h2>
-              <p style={{ color: "#0a50a7", marginTop: "2px" }}>
-                @{user.username ? user.username : "No username"}
-              </p>
-              <p>{user.bio ? user.bio : "This profile has no bio"}</p>
-            </div>
-
-            <div
-              className="middle-container"
-              style={
-                theme === "dark"
-                  ? { backgroundColor: "#141c2f" }
-                  : { backgroundColor: "#f5f8ff" }
-              }
-            >
-              <div className="middle-div">
-                <p className="middle-p">Repos</p>
-                <p className="middle-p">Followers</p>
-                <p className="middle-p">Following</p>
-              </div>
-              <div className="middle-div">
-                <p className="middle-p number">{user.repos ? user.repos : 0}</p>
-                <p className="middle-p number">
-                  {user.followers ? user.followers : 0}
-                </p>
-                <p className="middle-p number">
-                  {user.following ? user.following : 0}
-                </p>
-              </div>
-            </div>
-
-            <div className="bottom-div">
-              <div className="bottom-div-items">
-                <p className="layer1">
-                  <MdIcons.MdLocationPin className="icon" />
-                  {user.location ? user.location : "Not Available"}
-                </p>
-                <p className="layer1">
-                  <IoIcons.IoLogoTwitter className="icon" />
-                  {user.twitter ? user.twitter : "Not Available"}
-                </p>
+          {user && (
+            <>
+              <div className="left-div">
+                <img src={user.avatar} alt="avatar" />
               </div>
 
-              <div className="bottom-div-items">
-                <p className="layer2">
-                  <HiIcons.HiLink className="icon" />
-                  {user.blog ? user.blog : "Not Available"}
-                </p>
-                <p className="layer2">
-                  <RiIcons.RiBuildingFill className="icon" />
-                  {user.company ? user.company : "Not Available"}
-                </p>
+              <div className="right-div">
+                <div className="top-div">
+                  <p className="date">
+                    {user.createDate
+                      ? moment(user.createDate).format("[Joined] Do MMM YYYY")
+                      : "Date not available"}
+                  </p>
+                  <h2 style={{ marginBottom: "0px" }}>
+                    {user.name ? user.name : "Github User"}
+                  </h2>
+                  <p style={{ color: "#0a50a7", marginTop: "2px" }}>
+                    @{user.username ? user.username : "No username"}
+                  </p>
+                  <p>{user.bio ? user.bio : "This profile has no bio"}</p>
+                </div>
+
+                <div
+                  className="middle-container"
+                  style={
+                    theme === "dark"
+                      ? { backgroundColor: "#141c2f" }
+                      : { backgroundColor: "#f5f8ff" }
+                  }
+                >
+                  <div className="middle-div">
+                    <p className="middle-p">Repos</p>
+                    <p className="middle-p">Followers</p>
+                    <p className="middle-p">Following</p>
+                  </div>
+                  <div className="middle-div">
+                    <p className="middle-p number">
+                      {user.repos ? user.repos : 0}
+                    </p>
+                    <p className="middle-p number">
+                      {user.followers ? user.followers : 0}
+                    </p>
+                    <p className="middle-p number">
+                      {user.following ? user.following : 0}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bottom-div">
+                  <div className="bottom-div-items">
+                    <p className="layer1">
+                      <MdIcons.MdLocationPin className="icon" />
+                      {user.location ? user.location : "Not Available"}
+                    </p>
+                    <p className="layer1">
+                      <IoIcons.IoLogoTwitter className="icon" />
+                      {user.twitter ? user.twitter : "Not Available"}
+                    </p>
+                  </div>
+
+                  <div className="bottom-div-items">
+                    <p className="layer2">
+                      <HiIcons.HiLink className="icon" />
+                      {user.blog ? user.blog : "Not Available"}
+                    </p>
+                    <p className="layer2">
+                      <RiIcons.RiBuildingFill className="icon" />
+                      {user.company ? user.company : "Not Available"}
+                    </p>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
+            </>
+          )}
         </div>
       )}
     </div>
